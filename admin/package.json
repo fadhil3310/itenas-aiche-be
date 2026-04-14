@@ -1,0 +1,67 @@
+{
+  "name": "itenas-aiche-be-admin",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "@admin/src/*": "./src/*"
+  },
+  "scripts": {
+    "dev": "vite dev --port 5420",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "lint": "eslint",
+    "format": "prettier --check .",
+    "check": "prettier --write . && eslint --fix"
+  },
+  "dependencies": {
+    "@elysiajs/eden": "^1.4.9",
+    "@mdxeditor/editor": "^3.54.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "@tanstack/react-devtools": "latest",
+    "@tanstack/react-query": "^5.99.0",
+    "@tanstack/react-router": "latest",
+    "@tanstack/react-router-devtools": "latest",
+    "@tanstack/router-plugin": "^1.167.22",
+    "better-auth": "^1.6.2",
+    "clsx": "^2.1.1",
+    "ky": "^2.0.0",
+    "lucide-react": "^0.545.0",
+    "motion": "^12.38.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-hook-form": "^7.72.1",
+    "react-hot-toast": "^2.6.0",
+    "react-loading-indicators": "^1.0.1",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.2",
+    "use-debounce": "^10.1.1",
+    "use-file-picker": "^2.1.4",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@tanstack/devtools-vite": "latest",
+    "@tanstack/eslint-config": "latest",
+    "@tanstack/router-plugin": "latest",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^22.19.17",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "daisyui": "^5.5.19",
+    "elysia": "^1.4.28",
+    "jsdom": "^28.1.0",
+    "prettier": "^3.8.2",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.8",
+    "vitest": "^3.2.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "lightningcss"
+    ]
+  }
+}
