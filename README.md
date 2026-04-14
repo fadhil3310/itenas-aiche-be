@@ -15,17 +15,22 @@ Bun + Elysia + Postgresql
 
 ### How to Run
 
-1. Install dependencies.
+1. Change directory
+```
+cd backend
+```
+
+2. Install dependencies.
 ```
 bun install
 ```
 
-2. Generate Prisma client.
+3. Generate Prisma client.
 ``` 
 bunx --bun prisma generate
 ```
 
-3. Run.
+4. Run.
 ```
 bun dev
 ```
@@ -38,12 +43,17 @@ Vite + Tanstack Router + Eden Treaty
 
 ### How to Run
 
-1. Install dependencies.
+1. Change directory
+```
+cd admin
+```
+
+2. Install dependencies.
 ```
 pnpm install
 ```
 
-2. Run.
+3. Run.
 ```
 pnpm dev
 ```
