@@ -2,17 +2,17 @@ import { PublishStatus } from "@backend/generated/prisma/enums";
 import { NewsPlain } from "@backend/generated/prismabox/News";
 import { t } from "elysia";
 
-export const NewsModelStandardResponse = NewsPlain;
+const StandardResponse = NewsPlain;
 
-export const NewsModel = {
+const Model = {
   getAllQuery: t.Object({
     title: t.Optional(t.String()),
     status: t.Optional(t.Enum(PublishStatus)),
   }),
-  getAllResponse: t.Object({ data: t.Array(NewsModelStandardResponse) }),
+  getAllResponse: t.Object({ data: t.Array(StandardResponse) }),
 
   getIdParams: t.Object({ id: t.Number() }),
-  getIdResponse: t.Object({ data: t.Nullable(NewsModelStandardResponse) }),
+  getIdResponse: t.Object({ data: t.Nullable(StandardResponse) }),
 
   postBody: t.Object({
     title: t.String({ minLength: 1 }),
@@ -23,26 +23,14 @@ export const NewsModel = {
     status: t.Enum(PublishStatus),
   }),
   postResponse: t.Object({
-    message: t.String(),
     id: t.Number({ description: "The id of the created news" }),
   }),
 
   deleteIdParams: t.Object({ id: t.Number() }),
-  deleteIdMessage: t.Object({ message: t.String() }),
+  deleteIdMessage: { 204: t.Undefined() },
 };
 
-export type NewsModelType = {
-    standardResponse: typeof NewsModelStandardResponse.static,
-
-    getAllQuery: typeof NewsModel.getAllQuery.static,
-    getAllResponse: typeof NewsModel.getAllResponse.static,
-
-    getIdParams: typeof NewsModel.getIdParams.static,
-    getIdResponse: typeof NewsModel.getIdResponse.static,
-
-    createBody: typeof NewsModel.postBody.static,
-    createResponse: typeof NewsModel.postResponse.static,
-
-    deleteIdParams: typeof NewsModel.deleteIdParams.static,
-    deleteIdMessage: typeof NewsModel.deleteIdMessage.static,
+export const NewsModel = {
+  StandardResponse,
+  Model,
 };

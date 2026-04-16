@@ -12,6 +12,7 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
   .guard({
     auth: true,
   })
+
   // Get all News
   .get(
     "/",
@@ -24,14 +25,15 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
       return { data };
     },
     {
-      query: NewsModel.getAllQuery,
-      response: NewsModel.getAllResponse,
+      query: NewsModel.Model.getAllQuery,
+      response: NewsModel.Model.getAllResponse,
       detail: {
         summary: "Get all News",
         tags: ["Admin"],
       },
     },
   )
+
   // Get News based on its id
   .get(
     "/id/:id",
@@ -42,14 +44,15 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
       return { data };
     },
     {
-      params: NewsModel.getIdParams,
-      response: NewsModel.getIdResponse,
+      params: NewsModel.Model.getIdParams,
+      response: NewsModel.Model.getIdResponse,
       detail: {
         summary: "Get News based on its id",
         tags: ["Admin"],
       },
     },
   )
+
   // Create News
   .post(
     "/",
@@ -68,13 +71,12 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
         },
       });
       return {
-        message: "News successfully created.",
         id: news.id,
       };
     },
     {
-      body: NewsModel.postBody,
-      response: NewsModel.postResponse,
+      body: NewsModel.Model.postBody,
+      response: NewsModel.Model.postResponse,
       parse: "multipart/form-data",
       detail: {
         summary: "Create News",
@@ -82,21 +84,20 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
       },
     },
   )
+
   // Delete News based on its id
   .delete(
     "/id/:id",
-    async ({ params: { id } }) => {
+    async ({ params: { id }, status }) => {
       const news = await prisma.news.delete({
         where: { id },
       });
-
       deleteFile(news.image);
-
-      return { message: "News successfully deleted." };
+      return status(204, undefined);
     },
     {
-      params: NewsModel.deleteIdParams,
-      response: NewsModel.deleteIdMessage,
+      params: NewsModel.Model.deleteIdParams,
+      response: NewsModel.Model.deleteIdMessage,
       detail: {
         summary: "Delete News based on its id",
         tags: ["Admin"],

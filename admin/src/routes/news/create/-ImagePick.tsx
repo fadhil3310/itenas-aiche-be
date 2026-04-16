@@ -1,5 +1,5 @@
 import { Edit } from 'lucide-react';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import toast from 'react-hot-toast';
 
 const acceptedFileTypes = [

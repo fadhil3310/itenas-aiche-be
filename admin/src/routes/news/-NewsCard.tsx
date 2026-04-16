@@ -1,11 +1,12 @@
 import { urlImg } from '@admin/src/utils/url'
-import type { NewsModelType } from '@backend/src/controllers/admin/news/model'
+import type { NewsModel } from '@backend/src/controllers/admin/news/model'
 import { Link } from '@tanstack/react-router'
+import type { Static } from 'elysia'
 
 export function NewsCard({
   news,
 }: {
-  news: NewsModelType['standardResponse']
+  news: Static<typeof NewsModel.StandardResponse>
 }) {
   return (
     <Link to={'/news/' + news.id}>
