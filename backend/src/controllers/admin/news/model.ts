@@ -9,10 +9,10 @@ export const NewsModel = {
     title: t.Optional(t.String()),
     status: t.Optional(t.Enum(PublishStatus)),
   }),
-  getAllResponse: t.Object({ news: t.Array(NewsModelStandardResponse) }),
+  getAllResponse: t.Object({ data: t.Array(NewsModelStandardResponse) }),
 
   getIdParams: t.Object({ id: t.Number() }),
-  getIdResponse: t.Object({ news: t.Nullable(NewsModelStandardResponse) }),
+  getIdResponse: t.Object({ data: t.Nullable(NewsModelStandardResponse) }),
 
   postBody: t.Object({
     title: t.String({ minLength: 1 }),
@@ -42,4 +42,7 @@ export type NewsModelType = {
 
     createBody: typeof NewsModel.postBody.static,
     createResponse: typeof NewsModel.postResponse.static,
+
+    deleteIdParams: typeof NewsModel.deleteIdParams.static,
+    deleteIdMessage: typeof NewsModel.deleteIdMessage.static,
 };
