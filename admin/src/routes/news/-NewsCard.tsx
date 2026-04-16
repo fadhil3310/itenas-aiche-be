@@ -1,22 +1,26 @@
-import { urlImg } from '@admin/src/utils/url'
-import type { NewsModel } from '@backend/src/controllers/admin/news/model'
-import { Link } from '@tanstack/react-router'
-import type { Static } from 'elysia'
+import { urlImg } from '@admin/src/utils/url';
+import type { NewsModel } from '@backend/src/controllers/admin/news/model';
+import { Link } from '@tanstack/react-router';
+import type { Static } from 'elysia';
 
 export function NewsCard({
-  news,
+  data,
 }: {
-  news: Static<typeof NewsModel.StandardResponse>
+  data: Static<typeof NewsModel.StandardResponse>;
 }) {
   return (
-    <Link to={'/news/' + news.id}>
-      <div className="p-3 bg-base-300 shadow-md cursor-pointer">
+    <Link to={'/news/' + data.id}>
+      <div className="relative h-full bg-base-300 shadow-lg rounded-2xl cursor-pointer">
         <img
-          src={urlImg(news.image)}
-          className="w-full h-[250px] object-cover mb-3"
+          src={urlImg(data.image)}
+          className="w-full h-62.5 object-cover rounded-tl-2xl rounded-tr-2xl"
         />
-        <h2 className="">{news.title}</h2>
+        <div className="p-4 space-y-1">
+          <h2 className="font-bold">{data.title}</h2>
+          <p className="text-sm">{data.content}</p>
+          <p className="text-xs text-base-content/60">Oleh: {data.user.name}</p>
+        </div>
       </div>
     </Link>
-  )
+  );
 }
