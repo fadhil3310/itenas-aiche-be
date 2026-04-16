@@ -18,10 +18,10 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
     async ({ query }) => {
       const { title, status: publishStatus } = query;
 
-      const news = await prisma.news.findMany({
+      const data = await prisma.news.findMany({
         where: { title: { startsWith: title }, status: publishStatus },
       });
-      return { news };
+      return { data };
     },
     {
       query: NewsModel.getAllQuery,
@@ -36,10 +36,10 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
   .get(
     "/id/:id",
     async ({ params: { id } }) => {
-      const news = await prisma.news.findUnique({
+      const data = await prisma.news.findUnique({
         where: { id },
       });
-      return { news };
+      return { data };
     },
     {
       params: NewsModel.getIdParams,

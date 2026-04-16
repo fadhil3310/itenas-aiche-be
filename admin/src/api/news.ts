@@ -1,4 +1,4 @@
-import { client } from './base'
+import { client } from './base';
 import type { NewsModelType } from '@backend/src/controllers/admin/news/model';
 
 // News (what a crappy framework, type-safe?? yeah type-safe but so stupid it doesnt allows you to get the api request/response type directly)
@@ -8,12 +8,14 @@ import type { NewsModelType } from '@backend/src/controllers/admin/news/model';
 
 async function getAllNews(title: string) {
   const { data, error } = await client.news.get({ query: { title } });
-  return data?.news;
+  if (error) throw error;
+  return data?.data;
 }
 
 async function getNewsById(id: number) {
   const { data, error } = await client.news.id({ id }).get();
-  return data?.news;
+  if (error) throw error;
+  return data?.data;
 }
 
 async function createNews(news: NewsModelType['createBody']) {
@@ -24,6 +26,5 @@ async function createNews(news: NewsModelType['createBody']) {
 async function deleteNewsById(id: number) {
   await client.news.id({ id }).delete();
 }
-
 
 export const NewsAPI = { getAllNews, getNewsById, createNews, deleteNewsById };
