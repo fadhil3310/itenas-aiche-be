@@ -1,8 +1,14 @@
 import { PublishStatus } from "@backend/generated/prisma/enums";
 import { NewsPlain } from "@backend/generated/prismabox/News";
+import { UserPlain } from "@backend/generated/prismabox/User";
 import { t } from "elysia";
 
-const StandardResponse = NewsPlain;
+const StandardResponse = t.Object({
+  ...NewsPlain.properties,
+  user: t.Object({
+    ...(t.Pick(UserPlain, ['name']).properties)
+  }),
+});
 
 const Model = {
   getAllQuery: t.Object({

@@ -21,6 +21,11 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
 
       const data = await prisma.news.findMany({
         where: { title: { startsWith: title }, status: publishStatus },
+        include: {
+          user: {
+            select: { name: true },
+          },
+        },
       });
       return { data };
     },
@@ -40,6 +45,11 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
     async ({ params: { id } }) => {
       const data = await prisma.news.findUnique({
         where: { id },
+        include: {
+          user: {
+            select: { name: true },
+          },
+        },
       });
       return { data };
     },
