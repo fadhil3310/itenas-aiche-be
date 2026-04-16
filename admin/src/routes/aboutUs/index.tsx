@@ -39,7 +39,7 @@ function RouteComponent() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {data?.map((item) => (
-            <AboutUsCard data={item} />
+            <AboutUsCard key={item.id + "_aboutUs"} data={item} />
           ))}
         </div>
       </div>
