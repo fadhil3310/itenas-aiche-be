@@ -23,9 +23,8 @@ async function create(body: Static<typeof AboutUsAdmin.Model.postBody>) {
 }
 
 async function deleteById(id: number) {
-  const { data, error } = await client.aboutUs.id({ id }).delete();
+  const { error } = await client.aboutUs.id({ id }).delete();
   handleError(error);
-  return data;
 }
 
 // Category -----------------------------------
@@ -49,9 +48,8 @@ async function createCategory(body: Static<typeof AboutUsAdmin.Model.postCategor
 }
 
 async function deleteCategoryById(id: number) {
-  const { data, error } = await client.aboutUs.category.id({ id }).delete();
+  const { error } = await client.aboutUs.category.id({ id }).delete();
   handleError(error);
-  return data;
 }
 
 // ==============================================

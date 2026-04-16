@@ -25,7 +25,8 @@ const Model = {
     image: t.File({
       type: ["image/png", "image/jpeg", "image/avif", "image/webp"],
     }),
-    content: t.String(),
+    content: t.String({ minLength: 1 }),
+    summary: t.String({ minLength: 1 }),
     status: t.Enum(PublishStatus),
   }),
   postResponse: t.Object({
@@ -36,7 +37,7 @@ const Model = {
   deleteIdMessage: { 204: t.Undefined() },
 };
 
-export const NewsModel = {
+export const NewsAdminModel = {
   StandardResponse,
   Model,
 };

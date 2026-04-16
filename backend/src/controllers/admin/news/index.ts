@@ -3,7 +3,7 @@ import { logger } from "@backend/src/lib/logger";
 import { prisma } from "@backend/src/lib/db";
 import { authMiddleware } from "@backend/src/middlewares/auth";
 import { deleteFile, storeImage } from "@backend/src/services/storage";
-import { NewsModel } from "./model";
+import { NewsAdminModel } from "./model";
 
 const STORAGE_CATEGORY = "news";
 
@@ -30,8 +30,8 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
       return { data };
     },
     {
-      query: NewsModel.Model.getAllQuery,
-      response: NewsModel.Model.getAllResponse,
+      query: NewsAdminModel.Model.getAllQuery,
+      response: NewsAdminModel.Model.getAllResponse,
       detail: {
         summary: "Get all News",
         tags: ["Admin"],
@@ -54,8 +54,8 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
       return { data };
     },
     {
-      params: NewsModel.Model.getIdParams,
-      response: NewsModel.Model.getIdResponse,
+      params: NewsAdminModel.Model.getIdParams,
+      response: NewsAdminModel.Model.getIdResponse,
       detail: {
         summary: "Get News based on its id",
         tags: ["Admin"],
@@ -67,7 +67,7 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
   .post(
     "/",
     async ({ body, user }) => {
-      const { title, image, content, status } = body;
+      const { title, image, content, summary, status } = body;
       const authorId = user.id;
       const imageFileName = await storeImage(image, STORAGE_CATEGORY);
 
@@ -77,6 +77,7 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
           authorId,
           image: imageFileName,
           content,
+          summary,
           status,
         },
       });
@@ -85,8 +86,8 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
       };
     },
     {
-      body: NewsModel.Model.postBody,
-      response: NewsModel.Model.postResponse,
+      body: NewsAdminModel.Model.postBody,
+      response: NewsAdminModel.Model.postResponse,
       parse: "multipart/form-data",
       detail: {
         summary: "Create News",
@@ -106,8 +107,8 @@ export const newsRoutes = new Elysia({ prefix: "/news" })
       return status(204, undefined);
     },
     {
-      params: NewsModel.Model.deleteIdParams,
-      response: NewsModel.Model.deleteIdMessage,
+      params: NewsAdminModel.Model.deleteIdParams,
+      response: NewsAdminModel.Model.deleteIdMessage,
       detail: {
         summary: "Delete News based on its id",
         tags: ["Admin"],

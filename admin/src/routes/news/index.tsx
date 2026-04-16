@@ -17,19 +17,19 @@ function RouteComponent() {
 
   const { data, isPending, error } = useQuery({
     queryKey: ['all-news', searchDebounced],
-    queryFn: () => NewsAPI.getAllNews(searchDebounced),
+    queryFn: () => NewsAPI.getAll(searchDebounced),
   });
 
   return (
     <main className="w-full flex justify-center p-4 md:p-8">
-      <div className="w-full max-w-[1000px]">
+      <div className="w-full max-w-250">
         <div className="flex justify-end mb-4">
           <MenuBar value={search} onChange={setSearch} />
         </div>
 
         {/* Loading */}
         {isPending && (
-          <div className="w-full h-[300px] grid place-items-center">
+          <div className="w-full h-75 grid place-items-center">
             <OrbitProgress
               variant="spokes"
               color="#747474"
