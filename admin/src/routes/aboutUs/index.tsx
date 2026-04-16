@@ -1,35 +1,30 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { NewsAPI } from '@admin/src/api/news'
-import { NewsCard } from './-NewsCard'
+import { AboutUsCard } from './-AboutUsCard'
 import { MenuBar } from './-MenuBar'
-import { useState } from 'react'
-import { useDebounce } from 'use-debounce'
 import { OrbitProgress } from 'react-loading-indicators'
+import { AboutUsAPI } from '@admin/src/api/aboutUs'
 
-export const Route = createFileRoute('/news/')({
+export const Route = createFileRoute('/aboutUs/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const [search, setSearch] = useState('')
-  const [searchDebounced] = useDebounce(search, 100)
-
   const { data, isPending, error } = useQuery({
-    queryKey: ['all-news', searchDebounced],
-    queryFn: () => NewsAPI.getAllNews(searchDebounced),
+    queryKey: ['all-aboutUs'],
+    queryFn: () => AboutUsAPI.getAll(),
   })
 
   return (
     <main className="w-full flex justify-center p-4 md:p-8">
-      <div className="w-full max-w-[1000px]">
+      <div className="w-full max-w-250">
         <div className="flex justify-end mb-4">
-          <MenuBar value={search} onChange={setSearch} />
+          <MenuBar />
         </div>
 
         {/* Loading */}
         {isPending && (
-          <div className="w-full h-[300px] grid place-items-center">
+          <div className="w-full h-75 grid place-items-center">
             <OrbitProgress
               variant="spokes"
               color="#747474"
@@ -39,12 +34,12 @@ function RouteComponent() {
             />
           </div>
         )}
-        {error && <p>Gagal mengambil berita</p>}
-        {data?.length == 0 && <h2 className="text-center">Tidak ada berita</h2>}
+        {error && <p>Gagal mengambil data</p>}
+        {data?.length == 0 && <h2 className="text-center">Kosong</h2>}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {data?.map((news) => (
-            <NewsCard news={news} />
+          {data?.map((item) => (
+            <AboutUsCard data={item} />
           ))}
         </div>
       </div>

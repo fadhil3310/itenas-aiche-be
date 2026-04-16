@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { Search } from 'lucide-react'
 
-export function SearchBar({
+export function MenuBar({
   value,
   onChange,
 }: {

@@ -93,9 +93,10 @@ model News {
   id            Int       @id @default(autoincrement()) 
   image         String
   title         String
-  authorId      String
   content       String
   status        PublishStatus @default(DRAFT)
+
+  authorId      String
   user          User      @relation(fields: [authorId], references: [id])
 
   createdAt     DateTime  @default(now())
@@ -105,4 +106,27 @@ model News {
 enum PublishStatus {
   PUBLISHED
   DRAFT
+}
+
+model AboutUs {
+  id            Int               @id @default(autoincrement()) 
+  image         String
+  title         String
+  content       String
+
+  categoryId    Int
+  category      AboutUsCategory   @relation(fields: [categoryId], references: [id])
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model AboutUsCategory {
+  id            Int       @id @default(autoincrement()) 
+  name          String
+
+  cards         AboutUs[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }

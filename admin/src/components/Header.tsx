@@ -1,6 +1,6 @@
 import { Link, useMatchRoute } from '@tanstack/react-router'
 import ThemeToggle from './ThemeToggle'
-import { Newspaper, Home } from 'lucide-react'
+import { Newspaper, Home, Info } from 'lucide-react'
 import { cn } from '@admin/src/utils/tw'
 
 const navList = [
@@ -8,6 +8,11 @@ const navList = [
     icon: <Home />,
     to: '/',
     text: 'Home',
+  },
+  {
+    icon: <Info />,
+    to: '/aboutUs',
+    text: 'About Us'
   },
   {
     icon: <Newspaper />,

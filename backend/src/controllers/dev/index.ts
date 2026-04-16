@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 import * as z from "zod";
-import { authMiddleware } from "../middlewares/auth";
+import { authMiddleware } from "../../middlewares/auth";
 import { authClient } from "@backend/src/lib/auth-client";
 import { logger } from "@backend/src/lib/logger";
 

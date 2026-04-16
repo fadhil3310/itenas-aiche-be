@@ -22,6 +22,12 @@ const childLayouts = [
   {
     path: '/news/',
   },
+  {
+    path: '/aboutUs/create'
+  },
+  {
+    path: '/aboutUs/'
+  }
 ]
 
 const queryClient = new QueryClient()

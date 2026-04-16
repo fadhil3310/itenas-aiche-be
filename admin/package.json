@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@elysiajs/eden": "^1.4.9",
+    "@hookform/resolvers": "^5.2.2",
     "@mdxeditor/editor": "^3.54.0",
     "@tailwindcss/vite": "^4.2.2",
     "@tanstack/react-devtools": "latest",

@@ -14,8 +14,11 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
+import { Route as AboutUsIndexRouteImport } from './routes/aboutUs/index'
 import { Route as NewsCreateIndexRouteImport } from './routes/news/create/index'
 import { Route as NewsNewsIdIndexRouteImport } from './routes/news/$newsId/index'
+import { Route as AboutUsCreateIndexRouteImport } from './routes/aboutUs/create/index'
+import { Route as AboutUsAboutUsIdIndexRouteImport } from './routes/aboutUs/$aboutUsId/index'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -42,6 +45,11 @@ const LoginIndexRoute = LoginIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LoginRoute,
 } as any)
+const AboutUsIndexRoute = AboutUsIndexRouteImport.update({
+  id: '/aboutUs/',
+  path: '/aboutUs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsCreateIndexRoute = NewsCreateIndexRouteImport.update({
   id: '/news/create/',
   path: '/news/create/',
@@ -52,21 +60,37 @@ const NewsNewsIdIndexRoute = NewsNewsIdIndexRouteImport.update({
   path: '/news/$newsId/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutUsCreateIndexRoute = AboutUsCreateIndexRouteImport.update({
+  id: '/aboutUs/create/',
+  path: '/aboutUs/create/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutUsAboutUsIdIndexRoute = AboutUsAboutUsIdIndexRouteImport.update({
+  id: '/aboutUs/$aboutUsId/',
+  path: '/aboutUs/$aboutUsId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRouteWithChildren
+  '/aboutUs/': typeof AboutUsIndexRoute
   '/login/': typeof LoginIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/aboutUs/$aboutUsId/': typeof AboutUsAboutUsIdIndexRoute
+  '/aboutUs/create/': typeof AboutUsCreateIndexRoute
   '/news/$newsId/': typeof NewsNewsIdIndexRoute
   '/news/create/': typeof NewsCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/aboutUs': typeof AboutUsIndexRoute
   '/login': typeof LoginIndexRoute
   '/news': typeof NewsIndexRoute
+  '/aboutUs/$aboutUsId': typeof AboutUsAboutUsIdIndexRoute
+  '/aboutUs/create': typeof AboutUsCreateIndexRoute
   '/news/$newsId': typeof NewsNewsIdIndexRoute
   '/news/create': typeof NewsCreateIndexRoute
 }
@@ -75,8 +99,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRouteWithChildren
+  '/aboutUs/': typeof AboutUsIndexRoute
   '/login/': typeof LoginIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/aboutUs/$aboutUsId/': typeof AboutUsAboutUsIdIndexRoute
+  '/aboutUs/create/': typeof AboutUsCreateIndexRoute
   '/news/$newsId/': typeof NewsNewsIdIndexRoute
   '/news/create/': typeof NewsCreateIndexRoute
 }
@@ -86,19 +113,34 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/login'
+    | '/aboutUs/'
     | '/login/'
     | '/news/'
+    | '/aboutUs/$aboutUsId/'
+    | '/aboutUs/create/'
     | '/news/$newsId/'
     | '/news/create/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/login' | '/news' | '/news/$newsId' | '/news/create'
+  to:
+    | '/'
+    | '/about'
+    | '/aboutUs'
+    | '/login'
+    | '/news'
+    | '/aboutUs/$aboutUsId'
+    | '/aboutUs/create'
+    | '/news/$newsId'
+    | '/news/create'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/login'
+    | '/aboutUs/'
     | '/login/'
     | '/news/'
+    | '/aboutUs/$aboutUsId/'
+    | '/aboutUs/create/'
     | '/news/$newsId/'
     | '/news/create/'
   fileRoutesById: FileRoutesById
@@ -107,7 +149,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   LoginRoute: typeof LoginRouteWithChildren
+  AboutUsIndexRoute: typeof AboutUsIndexRoute
   NewsIndexRoute: typeof NewsIndexRoute
+  AboutUsAboutUsIdIndexRoute: typeof AboutUsAboutUsIdIndexRoute
+  AboutUsCreateIndexRoute: typeof AboutUsCreateIndexRoute
   NewsNewsIdIndexRoute: typeof NewsNewsIdIndexRoute
   NewsCreateIndexRoute: typeof NewsCreateIndexRoute
 }
@@ -149,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof LoginRoute
     }
+    '/aboutUs/': {
+      id: '/aboutUs/'
+      path: '/aboutUs'
+      fullPath: '/aboutUs/'
+      preLoaderRoute: typeof AboutUsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news/create/': {
       id: '/news/create/'
       path: '/news/create'
@@ -161,6 +213,20 @@ declare module '@tanstack/react-router' {
       path: '/news/$newsId'
       fullPath: '/news/$newsId/'
       preLoaderRoute: typeof NewsNewsIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aboutUs/create/': {
+      id: '/aboutUs/create/'
+      path: '/aboutUs/create'
+      fullPath: '/aboutUs/create/'
+      preLoaderRoute: typeof AboutUsCreateIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aboutUs/$aboutUsId/': {
+      id: '/aboutUs/$aboutUsId/'
+      path: '/aboutUs/$aboutUsId'
+      fullPath: '/aboutUs/$aboutUsId/'
+      preLoaderRoute: typeof AboutUsAboutUsIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -180,7 +246,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRouteWithChildren,
+  AboutUsIndexRoute: AboutUsIndexRoute,
   NewsIndexRoute: NewsIndexRoute,
+  AboutUsAboutUsIdIndexRoute: AboutUsAboutUsIdIndexRoute,
+  AboutUsCreateIndexRoute: AboutUsCreateIndexRoute,
   NewsNewsIdIndexRoute: NewsNewsIdIndexRoute,
   NewsCreateIndexRoute: NewsCreateIndexRoute,
 }

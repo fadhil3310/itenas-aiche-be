@@ -1,41 +1,41 @@
-import { Edit } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useRef } from 'react'
-import toast from 'react-hot-toast'
+import { Edit } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import toast from 'react-hot-toast';
 
 const acceptedFileTypes = [
   'image/png',
   'image/jpeg',
   'image/webp',
   'image/avif',
-]
+];
 
 export function ImagePick({
   value,
   onChange,
 }: {
-  value: File | null
-  onChange: (value: File) => void
+  value: File | null;
+  onChange: (value: File) => void;
 }) {
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const fileUrl = useMemo(() => {
-    if (value == null) return ''
-    return URL.createObjectURL(value)
-  }, [value])
+    if (value == null) return '';
+    return URL.createObjectURL(value);
+  }, [value]);
 
   const handlePickFile = useCallback(() => {
-    fileInputRef.current?.click()
-  }, [fileInputRef])
+    fileInputRef.current?.click();
+  }, [fileInputRef]);
 
   const handleFileInput = useCallback(
     (ev: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
-      const file = ev.target.files?.[0]
+      const file = ev.target.files?.[0];
       if (file == null || !acceptedFileTypes.includes(file.type)) {
-        return toast.error('Tipe gambar wajib PNG, JPG, WEBP, atau AVIF')
+        return toast.error('Tipe gambar wajib PNG, JPG, WEBP, atau AVIF');
       }
-      onChange(file)
+      onChange(file);
     },
     [onChange],
-  )
+  );
 
   return (
     <div className="w-full h-[300px] relative border border-neutral rounded-lg">
@@ -53,6 +53,7 @@ export function ImagePick({
       )}
 
       <button
+        type="button"
         className="absolute right-0 bottom-0 btn btn-accent"
         onClick={handlePickFile}
       >
@@ -67,5 +68,5 @@ export function ImagePick({
         accept="image/png, image/jpeg, image/webp, image/avif"
       />
     </div>
-  )
+  );
 }
